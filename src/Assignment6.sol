@@ -32,7 +32,7 @@ contract Assignment6 {
     // - Take one parameter: `amount`
     // - Use the `hasEnoughBalance` modifier
     // - Emit the `FundsWithdrawn` event
-    function withdraw(uint256 amount) external payable hasEnoughBalance(amount){
+    function withdraw(uint256 amount) external hasEnoughBalance(amount){
         // decrement user balance from balances mapping 
         balances[msg.sender] -= amount;
         // send tokens to the caller
@@ -47,6 +47,6 @@ contract Assignment6 {
     // - Return the contract's balance
     function getContractBalance() public view returns(uint) {
         // return the balance of the contract
-        return balances[msg.sender] ;
+        return balances[msg.sender];
     }
 }
