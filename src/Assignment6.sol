@@ -9,9 +9,9 @@ contract Assignment6 {
     // 3. Create a public mapping called `balances` to tracker users balances
     mapping(address => uint) public balances;
     // Modifier to check if sender has enough balance
-    modifier hasEnoughBalance(uint amount) {
+    modifier hasEnoughBalance(uint256 amount) {
         // Fill in the logic using require
-        require(balances[msg.sender]==amount,"Insufficent balance");
+        require(balances[msg.sender]>=amount,"Insufficent balance");
         _;
     }
 
@@ -32,7 +32,7 @@ contract Assignment6 {
     // - Take one parameter: `amount`
     // - Use the `hasEnoughBalance` modifier
     // - Emit the `FundsWithdrawn` event
-    function withdraw(uint amount) external hasEnoughBalance(amount){
+    function withdraw(uint256 amount) external payable hasEnoughBalance(amount){
         // decrement user balance from balances mapping 
         balances[msg.sender] -= amount;
         // send tokens to the caller
@@ -47,6 +47,6 @@ contract Assignment6 {
     // - Return the contract's balance
     function getContractBalance() public view returns(uint) {
         // return the balance of the contract
-        return balances[address(this)] ;
+        return balances[msg.sender] ;
     }
 }
